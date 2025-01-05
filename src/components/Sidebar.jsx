@@ -1,5 +1,5 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+import React from "react";
+import { useRouter } from "next/router";
 
 const Sidebar = () => {
   const router = useRouter();
@@ -8,7 +8,7 @@ const Sidebar = () => {
     <aside className="bg-gray-900 text-gray-100 w-64 min-h-screen p-6 flex flex-col justify-between shadow-lg">
       {/* Logo Section */}
       <div>
-        <div className="flex items-center space-x-3 mb-8">
+        <div className="flex flex-col items-center space-y-2 mb-8">
           <img
             src="/logo.png"
             alt="Company Logo"
@@ -22,11 +22,11 @@ const Sidebar = () => {
         {/* Navigation Links */}
         <nav className="space-y-4">
           <button
-            onClick={() => router.push('/')}
+            onClick={() => router.push("/")}
             className={`flex items-center w-full px-4 py-3 rounded-lg transition-all ${
-              router.pathname === '/'
-                ? 'bg-purple-600 text-white'
-                : 'hover:bg-gray-800 hover:text-purple-400'
+              router.pathname === "/"
+                ? "bg-purple-600 text-white"
+                : "hover:bg-gray-800 hover:text-purple-400"
             }`}
           >
             <svg
@@ -47,11 +47,11 @@ const Sidebar = () => {
           </button>
 
           <button
-            onClick={() => router.push('/profile')}
+            onClick={() => router.push("/profile")}
             className={`flex items-center w-full px-4 py-3 rounded-lg transition-all ${
-              router.pathname === '/profile'
-                ? 'bg-purple-600 text-white'
-                : 'hover:bg-gray-800 hover:text-purple-400'
+              router.pathname === "/profile"
+                ? "bg-purple-600 text-white"
+                : "hover:bg-gray-800 hover:text-purple-400"
             }`}
           >
             <svg
@@ -74,7 +74,7 @@ const Sidebar = () => {
           <button
             onClick={() => {
               localStorage.clear();
-              router.push('/role-selection'); // Redirect to Role Selection page
+              router.push("/role-selection"); // Redirect to Role Selection page
             }}
             className="flex items-center w-full px-4 py-3 rounded-lg hover:bg-gray-800 hover:text-purple-400 transition-all"
           >

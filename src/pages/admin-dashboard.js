@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState } from "react";
+import { useRouter } from "next/router";
 
 const AdminDashboard = () => {
   const router = useRouter();
-  const [payoutRate, setPayoutRate] = useState('');
-  const [articles, setArticles] = useState('');
+  const [payoutRate, setPayoutRate] = useState("");
+  const [articles, setArticles] = useState("");
   const [totalPayout, setTotalPayout] = useState(
-    localStorage.getItem('totalPayout') || 0
+    localStorage.getItem("totalPayout") || 0
   );
 
   const calculatePayout = () => {
     const payout = payoutRate * articles;
     setTotalPayout(payout);
-    localStorage.setItem('totalPayout', payout); // Store in localStorage
+    localStorage.setItem("totalPayout", payout); // Store in localStorage
   };
 
   const logout = () => {
-    router.push('/admin-login');
+    router.push("/role-selection"); // Redirect to Role Selection page
   };
 
   return (
@@ -73,7 +73,8 @@ const AdminDashboard = () => {
               Calculate Payout
             </button>
             <h2 className="text-2xl font-semibold text-gray-800 mt-4">
-              Total Payout: <span className="text-green-600">${totalPayout}</span>
+              Total Payout:{" "}
+              <span className="text-green-600">${totalPayout}</span>
             </h2>
           </div>
 
@@ -115,7 +116,9 @@ const AdminDashboard = () => {
               <h3 className="text-lg font-semibold text-green-800">
                 Total Payout
               </h3>
-              <p className="text-2xl font-bold text-green-600">${totalPayout}</p>
+              <p className="text-2xl font-bold text-green-600">
+                ${totalPayout}
+              </p>
             </div>
             <div className="bg-yellow-100 p-4 rounded-lg text-center">
               <h3 className="text-lg font-semibold text-yellow-800">
