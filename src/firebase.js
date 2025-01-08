@@ -3,13 +3,7 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 // Your Firebase configuration
 const firebaseConfig = {
-  apiKey: "djbfjds",
-  authDomain: "dsfds",
-  projectId: "ldsfd22",
-  storageBucket: "ldsf", // Fixed typo
-  messagingSenderId: "dsf",
-  appId: "1dsfb59",
-  measurementId: "G-dsfdssYRV",
+
 };
 
 // Initialize Firebase app
