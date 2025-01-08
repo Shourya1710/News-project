@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebase';
-import Sidebar from '../components/Sidebar';
-import NewsTable from '../components/NewsTable';
-import ExportButtons from '../components/ExportButtons';
-import Charts from '../components/Charts'; // Insights (Graphical Charts)
-import { fetchNews } from '../utils/fetchNews';
+import React, { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase";
+import Sidebar from "../components/Sidebar";
+import NewsTable from "../components/NewsTable";
+import ExportButtons from "../components/ExportButtons";
+import Charts from "../components/Charts"; // Insights (Graphical Charts)
+import { fetchNews } from "../utils/fetchNews";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [news, setNews] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({
-    author: '',
-    dateRange: { start: '', end: '' },
-    type: '',
+    author: "",
+    dateRange: { start: "", end: "" },
+    type: "",
   });
   const [payoutRates, setPayoutRates] = useState({});
   const [authorPayouts, setAuthorPayouts] = useState([]);
@@ -24,7 +24,7 @@ const Dashboard = () => {
       if (currentUser) {
         setUser(currentUser);
       } else {
-        window.location.href = '/login';
+        window.location.href = "/login";
       }
     });
     return () => unsubscribe();
@@ -37,14 +37,14 @@ const Dashboard = () => {
         setNews(articles || []);
         calculatePayouts(articles);
       } catch (error) {
-        console.error('Error fetching news:', error);
+        console.error("Error fetching news:", error);
       }
     };
     loadNews();
   }, []);
 
   const calculatePayouts = (articles) => {
-    const authors = articles.map((article) => article.author || 'Unknown');
+    const authors = articles.map((article) => article.author || "Unknown");
     const counts = authors.reduce((acc, author) => {
       acc[author] = (acc[author] || 0) + 1;
       return acc;
@@ -105,12 +105,12 @@ const Dashboard = () => {
               />
             ) : (
               <div className="w-16 h-16 rounded-full bg-blue-200 flex items-center justify-center text-blue-600 text-xl font-bold shadow-md">
-                {user?.displayName?.charAt(0) || 'U'}
+                {user?.displayName?.charAt(0) || "U"}
               </div>
             )}
             <div>
               <h1 className="text-3xl font-semibold text-gray-800">
-                Welcome, {user?.displayName || 'User'}
+                Welcome, {user?.displayName || "User"}
               </h1>
               <p className="text-gray-600">{user?.email}</p>
             </div>
@@ -131,12 +131,12 @@ const Dashboard = () => {
                 placeholder="Filter by author..."
                 className="flex-1 py-2 px-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 shadow-sm"
                 value={filters.author}
-                onChange={(e) => handleFilterChange('author', e.target.value)}
+                onChange={(e) => handleFilterChange("author", e.target.value)}
               />
               <select
                 className="flex-1 py-2 px-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 shadow-sm"
                 value={filters.type}
-                onChange={(e) => handleFilterChange('type', e.target.value)}
+                onChange={(e) => handleFilterChange("type", e.target.value)}
               >
                 <option value="">All Types</option>
                 <option value="news">News</option>
@@ -149,7 +149,7 @@ const Dashboard = () => {
                 className="flex-1 py-2 px-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 shadow-sm"
                 value={filters.dateRange.start}
                 onChange={(e) =>
-                  handleFilterChange('dateRange', {
+                  handleFilterChange("dateRange", {
                     ...filters.dateRange,
                     start: e.target.value,
                   })
@@ -160,7 +160,7 @@ const Dashboard = () => {
                 className="flex-1 py-2 px-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 shadow-sm"
                 value={filters.dateRange.end}
                 onChange={(e) =>
-                  handleFilterChange('dateRange', {
+                  handleFilterChange("dateRange", {
                     ...filters.dateRange,
                     end: e.target.value,
                   })
@@ -171,7 +171,9 @@ const Dashboard = () => {
 
           {/* News Table */}
           <div className="bg-white rounded-lg shadow-md p-6 overflow-auto">
-            <h2 className="text-xl font-bold text-gray-800 mb-4">Latest News</h2>
+            <h2 className="text-xl font-bold text-gray-800 mb-4">
+              Latest News
+            </h2>
             <NewsTable news={filteredNews} />
           </div>
         </div>
@@ -186,7 +188,9 @@ const Dashboard = () => {
 
           {/* Payout Details */}
           <div className="bg-white rounded-lg shadow-md p-6 overflow-auto">
-            <h2 className="text-xl font-bold text-gray-800 mb-4">Payout Details</h2>
+            <h2 className="text-xl font-bold text-gray-800 mb-4">
+              Payout Details
+            </h2>
             <table className="w-full table-auto text-left">
               <thead>
                 <tr>
@@ -206,12 +210,17 @@ const Dashboard = () => {
                         type="number"
                         value={payoutRates[payout.author] || 0}
                         onChange={(e) =>
-                          handleRateChange(payout.author, parseFloat(e.target.value))
+                          handleRateChange(
+                            payout.author,
+                            parseFloat(e.target.value)
+                          )
                         }
                         className="w-16 py-1 px-2 border rounded"
                       />
                     </td>
-                    <td className="px-4 py-2 border-b">${payout.payout.toFixed(2)}</td>
+                    <td className="px-4 py-2 border-b">
+                      ${payout.payout.toFixed(2)}
+                    </td>
                   </tr>
                 ))}
               </tbody>
